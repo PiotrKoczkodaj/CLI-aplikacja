@@ -1,12 +1,13 @@
 const fs = require("node:fs").promises;
 const path = require("node:path");
 
+
 const contactsPath = path.join(__dirname, "/db/", "contacts.json");
 
 const listContacts = () => {
   fs.readFile(contactsPath)
-    .then((resp) => {
-      console.log(JSON.parse(resp));
+      .then((resp) => {
+        console.table(JSON.parse(resp))
     })
     .catch((error) => {
       console.log(error);
@@ -53,7 +54,7 @@ const addContact = (name, email, phone) => {
       name,
       email,
       phone,
-      id: Math.floor(Math.random() * 789987654321543567),
+      id: Math.random().toString(36).substring(2,12),
     };
 
     contactsList.push(contactToAdd);
@@ -61,10 +62,6 @@ const addContact = (name, email, phone) => {
   });
 };
 
-// listContacts();
-// getContactById("05olLMgyVQdWRwgKfg5J6");
-//  removeContact(3185009610206531);
-// addContact('pawel','dddddd',1234464562);
 
 module.exports ={
     listContacts,
