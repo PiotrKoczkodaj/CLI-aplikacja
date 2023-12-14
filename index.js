@@ -20,7 +20,7 @@ const getContactById = (contactId) => {
       const results = contactsList.filter((contact) => {
         return contact.id === contactId;
       });
-      console.log(results)
+      console.log(results);
     })
     .catch((err) => {
       console.log(err);
@@ -34,25 +34,34 @@ const removeContact = (contactId) => {
       contactsList.map((contact) => {
         if (contact.id === contactId) {
           const indexToDelete = contactsList.indexOf(contact);
-          console.log('Usunięto...')
+          console.log("Usunięto...");
           contactsList.splice(indexToDelete, 1);
-           fs.writeFile(contactsPath, JSON.stringify(contactsList));
+          fs.writeFile(contactsPath, JSON.stringify(contactsList));
+          console.log(contactsList.length);
         }
       });
-      
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-// const addContact = () => {
-//   fs.readFile(contactsPath).then(resp => {
-//     console.log(JSON.parse(resp).length)
-//   })
-// }
-  //  listContacts();
-  // getContactById('05olLMgyVQdWRwgKfg5J6');
-   removeContact('05olLMgyVQdWRwgKfg5J6');
+const addContact = (name, email, phone) => {
+  fs.readFile(contactsPath).then((resp) => {
+    const contactsList = JSON.parse(resp);
+    const contactToAdd = {
+      name,
+      email,
+      phone,
+      id: Math.floor(Math.random() * 789987654321543567),
+    };
 
-// addContact()
+    contactsList.push(contactToAdd);
+    fs.writeFile(contactsPath, JSON.stringify(contactsList));
+  });
+};
+
+// listContacts();
+// getContactById("05olLMgyVQdWRwgKfg5J6");
+//  removeContact(3185009610206531);
+// addContact('pawel','dddddd',1234464562);

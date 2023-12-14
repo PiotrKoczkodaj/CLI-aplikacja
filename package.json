@@ -21,5 +21,8 @@
   "homepage": "https://github.com/PiotrKoczkodaj/CLI-aplikacja#readme",
   "devDependencies": {
     "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.4"
   }
 }
