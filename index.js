@@ -20,8 +20,7 @@ const getContactById = (contactId) => {
       const results = contactsList.filter((contact) => {
         return contact.id === contactId;
       });
-        console.log(results[0]);
-        
+      console.log(results)
     })
     .catch((err) => {
       console.log(err);
@@ -32,23 +31,28 @@ const removeContact = (contactId) => {
   fs.readFile(contactsPath)
     .then((resp) => {
       const contactsList = JSON.parse(resp);
-      const results = contactsList.filter((contact) => {
-        return contact.id === contactId;
+      contactsList.map((contact) => {
+        if (contact.id === contactId) {
+          const indexToDelete = contactsList.indexOf(contact);
+          console.log('Usunięto...')
+          contactsList.splice(indexToDelete, 1);
+           fs.writeFile(contactsPath, JSON.stringify(contactsList));
+        }
       });
-        const indexToDelete = contactsList.indexOf(results[0]);
-         contactsList.splice(indexToDelete, 1);
-        console.log(contactsList)
+      
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const addContact = (name, email, phone) => {
-    
-}
+// const addContact = () => {
+//   fs.readFile(contactsPath).then(resp => {
+//     console.log(JSON.parse(resp).length)
+//   })
+// }
+  //  listContacts();
+  // getContactById('05olLMgyVQdWRwgKfg5J6');
+   removeContact('05olLMgyVQdWRwgKfg5J6');
 
-//  listContacts();
-// //   getContactById('05olLMgyVQdWRwgKfg5J6');
-   removeContact('AeHIrLTr6JkxGE6SN-0Rw');
-
+// addContact()
